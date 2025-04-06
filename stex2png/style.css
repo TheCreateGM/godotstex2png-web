@@ -1,0 +1,413 @@
+:root {
+    /* --- Color Palette (Light Mode - Default) --- */
+    --primary-color: #007bff;
+    --primary-color-darker: #0056b3;
+    --success-color: #28a745;
+    --success-color-darker: #218838;
+    --error-color: #dc3545;
+    --error-color-darker: #c82333;
+    --warning-color: #ffc107;
+    --warning-color-darker: #e0a800;
+    --info-color: #17a2b8;
+    --info-color-darker: #138496;
+
+    --bg-color: #f8f9fa; /* Light background */
+    --fg-color: #ffffff; /* Light foreground (card) */
+    --text-color: #212529; /* Dark text for light bg */
+    --text-muted: #6c757d; /* Muted text */
+    --border-color: #dee2e6; /* Light border */
+    --input-bg: #ffffff;
+    --input-text: #495057;
+    --code-bg: #e9ecef;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --disabled-bg: #e9ecef; /* Changed disabled bg for light */
+    --disabled-text: #6c757d;
+    --progress-bg: #e9ecef;
+
+    /* Status colors - Light */
+    --status-info-bg: #e2f3f5;
+    --status-info-border: #b1e0e5;
+    --status-info-text: #0c5460; /* Adjusted for contrast */
+    --status-processing-bg: #fff3cd;
+    --status-processing-border: #ffeeba;
+    --status-processing-text: #856404; /* Adjusted for contrast */
+    --status-success-bg: #d4edda;
+    --status-success-border: #c3e6cb;
+    --status-success-text: #155724;
+    --status-error-bg: #f8d7da;
+    --status-error-border: #f5c6cb;
+    --status-error-text: #721c24;
+
+    /* Theme Toggle Button - Light */
+    --theme-toggle-bg: #e9ecef;
+    --theme-toggle-text: #495057;
+    --theme-toggle-hover-bg: #dee2e6;
+
+    /* --- Layout & Styling --- */
+    --border-radius: 0.375rem; /* ~6px */
+    --box-shadow: 0 4px 12px var(--shadow-color);
+    --spacing-unit: 1rem; /* ~16px */
+
+    /* --- Transitions --- */
+    --color-transition:
+        color 0.3s ease, background-color 0.3s ease,
+        border-color 0.3s ease;
+
+    color-scheme: light dark; /* Signal support for both modes */
+}
+
+/* Define dark mode colors using a data attribute */
+html[data-theme="dark"]:root {
+    /* --- Color Palette (Dark Mode) --- */
+    --primary-color: #3b82f6; /* Lighter blue for dark bg */
+    --primary-color-darker: #2563eb;
+    --success-color: #10b981; /* Lighter green */
+    --success-color-darker: #059669;
+    --error-color: #ef4444; /* Lighter red */
+    --error-color-darker: #dc2626;
+    --warning-color: #f59e0b; /* Lighter yellow/orange */
+    --warning-color-darker: #d97706;
+    --info-color: #06b6d4; /* Lighter cyan */
+    --info-color-darker: #0891b2;
+
+    --bg-color: #121212; /* Very dark grey */
+    --fg-color: #1e1e1e; /* Slightly lighter dark grey (card) */
+    --text-color: #e5e7eb; /* Light grey text */
+    --text-muted: #9ca3af; /* Medium grey muted text */
+    --border-color: #4b5563; /* Darker border */
+    --input-bg: #2d2d2d;
+    --input-text: #e5e7eb;
+    --code-bg: #374151;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --disabled-bg: #4b5563;
+    --disabled-text: #9ca3af;
+    --progress-bg: #374151; /* Darker progress track */
+
+    /* Status colors - Dark */
+    --status-info-bg: #1e3a8a; /* Darker blue */
+    --status-info-border: #1e40af;
+    --status-info-text: #bfdbfe; /* Light blue text */
+    --status-processing-bg: #92400e; /* Darker orange */
+    --status-processing-border: #b45309;
+    --status-processing-text: #fef3c7; /* Light yellow text */
+    --status-success-bg: #064e3b; /* Darker green */
+    --status-success-border: #047857;
+    --status-success-text: #a7f3d0; /* Light green text */
+    --status-error-bg: #7f1d1d; /* Darker red */
+    --status-error-border: #b91c1c;
+    --status-error-text: #fecaca; /* Light red text */
+
+    /* Theme Toggle Button - Dark */
+    --theme-toggle-bg: #374151;
+    --theme-toggle-text: #e5e7eb;
+    --theme-toggle-hover-bg: #4b5563;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%; /* Base font size */
+    /* Smooth theme transition */
+    transition: var(--color-transition);
+}
+
+body {
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top for fixed button */
+    min-height: 100vh;
+    padding: var(--spacing-unit);
+    padding-top: calc(
+        var(--spacing-unit) * 4
+    ); /* More space at top */
+    transition: var(--color-transition);
+    position: relative; /* Needed for fixed positioning context */
+}
+
+#theme-toggle {
+    position: fixed;
+    top: var(--spacing-unit);
+    right: var(--spacing-unit);
+    background-color: var(--theme-toggle-bg);
+    color: var(--theme-toggle-text);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.5rem 0.8rem;
+    font-size: 1.2rem; /* Larger emoji/icon */
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1000;
+    transition:
+        var(--color-transition),
+        transform 0.1s ease;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+#theme-toggle:hover {
+    background-color: var(--theme-toggle-hover-bg);
+    transform: translateY(-1px);
+}
+#theme-toggle:active {
+    transform: translateY(0);
+}
+
+#converter-container {
+    background-color: var(--fg-color);
+    padding: calc(var(--spacing-unit) * 2); /* 32px */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 550px;
+    width: 100%;
+    text-align: center;
+    transition:
+        var(--color-transition),
+        box-shadow 0.3s ease;
+    border: 1px solid var(--border-color); /* Subtle border */
+    margin-top: var(
+        --spacing-unit
+    ); /* Add margin below fixed button */
+}
+
+h1 {
+    color: var(--text-color);
+    margin-bottom: calc(var(--spacing-unit) * 1); /* 16px */
+    font-size: 1.75rem; /* ~28px */
+    font-weight: 600; /* Semibold */
+    transition: var(--color-transition);
+}
+h1 > span:first-child {
+    /* Emoji */
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+p {
+    color: var(--text-muted);
+    margin-bottom: calc(var(--spacing-unit) * 1.5); /* 24px */
+    font-size: 1rem; /* ~16px */
+    transition: var(--color-transition);
+}
+
+p code {
+    background-color: var(--code-bg);
+    color: var(--text-color); /* Adjust code text color */
+    padding: 0.2em 0.4em;
+    border-radius: 0.2rem;
+    font-size: 0.9em;
+    transition: var(--color-transition);
+}
+
+input[type="file"] {
+    display: block;
+    width: 100%; /* Make it full width */
+    margin: calc(var(--spacing-unit) * 1.5) auto; /* 24px */
+    font-size: 0.95rem; /* ~15px */
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    line-height: 1.5; /* Align text better */
+    padding: 0; /* Remove default padding */
+    background-color: var(--input-bg); /* Input background */
+    color: var(--input-text); /* Input text color */
+    transition:
+        var(--color-transition),
+        border-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button {
+    font-family: inherit; /* Use body font */
+    font-weight: 500; /* Medium */
+    margin-right: var(--spacing-unit);
+    padding: 0.6rem 1rem; /* Adjust padding */
+    background-color: var(--primary-color);
+    color: white; /* Keep text white on primary button */
+    border: none;
+    border-radius: var(--border-radius) 0 0 var(--border-radius); /* Rounded corners on left only */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    height: 100%;
+    border-right: 1px solid var(--border-color); /* Separator */
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--primary-color-darker);
+}
+
+/* Style the text part of the file input */
+input[type="file"]::before {
+    content: "Choose file..."; /* Default text */
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    color: var(--text-muted);
+    transition: var(--color-transition);
+}
+input[type="file"]:not([value=""])::before {
+    content: ""; /* Hide default text when file selected */
+    display: none;
+}
+/* Add custom styling for selected file name if needed (more complex JS) */
+
+button#convertBtn {
+    /* Be more specific for convert button */
+    background-color: var(--success-color);
+    color: white; /* Keep text white on success button */
+    padding: 0.75rem 1.5rem; /* 12px 24px */
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem; /* 16px */
+    font-weight: 500; /* Medium */
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease,
+        var(--color-transition); /* Add color transition */
+    margin-top: var(--spacing-unit); /* 16px */
+    width: 100%; /* Full width button */
+    max-width: 250px; /* Limit max width */
+}
+
+button#convertBtn:hover {
+    background-color: var(--success-color-darker);
+    transform: translateY(-1px); /* Subtle lift */
+}
+
+button#convertBtn:active {
+    transform: translateY(0px); /* Press effect */
+}
+
+button#convertBtn:disabled {
+    background-color: var(
+        --disabled-bg
+    ); /* Use themed disabled color */
+    color: var(--disabled-text);
+    cursor: not-allowed;
+    transform: none;
+}
+
+#status {
+    margin-top: calc(var(--spacing-unit) * 1.5); /* 24px */
+    padding: var(--spacing-unit); /* 16px */
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    min-height: calc(
+        1.6em + 2 * var(--spacing-unit)
+    ); /* Ensure space */
+    display: none; /* Hidden by default */
+    word-wrap: break-word;
+    border: 1px solid transparent;
+    font-size: 0.95rem;
+    transition: var(--color-transition);
+}
+
+/* Status message styles using CSS variables */
+.status-info {
+    background-color: var(--status-info-bg);
+    border-color: var(--status-info-border);
+    color: var(--status-info-text);
+}
+.status-processing {
+    background-color: var(--status-processing-bg);
+    border-color: var(--status-processing-border);
+    color: var(--status-processing-text);
+}
+.status-success {
+    background-color: var(--status-success-bg);
+    border-color: var(--status-success-border);
+    color: var(--status-success-text);
+}
+.status-error {
+    background-color: var(--status-error-bg);
+    border-color: var(--status-error-border);
+    color: var(--status-error-text);
+}
+
+#progress-container {
+    margin-top: var(--spacing-unit); /* 16px */
+    width: 100%;
+    background-color: var(
+        --progress-bg
+    ); /* Themed progress track */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    height: 1.25rem; /* 20px */
+    display: none; /* Hidden by default */
+    transition: var(--color-transition);
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--success-color); /* Use success color */
+    text-align: center;
+    line-height: 1.25rem; /* Match container height */
+    color: white; /* Keep white text on progress bar */
+    font-size: 0.8rem; /* ~13px */
+    font-weight: bold;
+    transition:
+        width 0.3s ease-out,
+        var(--color-transition); /* Add color transition */
+    white-space: nowrap;
+}
+
+#results {
+    margin-top: var(--spacing-unit); /* 16px */
+}
+
+#download-link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem; /* ~10px 19px */
+    background-color: var(--primary-color);
+    color: white; /* Keep white text */
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease,
+        var(--color-transition); /* Add color transition */
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+#download-link:hover {
+    background-color: var(--primary-color-darker);
+    transform: translateY(-1px);
+}
+#download-link:active {
+    transform: translateY(0px);
+}
+
+.file-info {
+    font-size: 0.9em;
+    color: var(--text-muted); /* Use themed muted color */
+    margin-top: calc(var(--spacing-unit) * 0.5); /* 8px */
+    line-height: 1.4;
+    text-align: left; /* Align info left within the status box */
+    padding-left: 0.5rem;
+    transition: var(--color-transition);
+}
+.file-info span {
+    font-weight: 600;
+    color: var(--text-color); /* Use themed text color */
+    transition: var(--color-transition);
+}
+.file-info ℹ️ {
+    /* Style emoji if needed */
+    margin-right: 0.3em;
+}

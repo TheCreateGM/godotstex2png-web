@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Godot STEX to PNG Converter</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <button
+            id="theme-toggle"
+            type="button"
+            title="Toggle theme"
+            aria-label="Toggle theme"
+        >
+            <!-- Icon will be set by JS -->
+        </button>
+
+        <main id="converter-container">
+            <h1>
+                <span aria-hidden="true">🖼️</span> Godot STEX to PNG Converter
+            </h1>
+            <p>
+                Select a Godot <code>.stex</code> file to convert it into a
+                standard PNG image.
+            </p>
+
+            <form id="uploadForm">
+                <input
+                    type="file"
+                    id="stexFile"
+                    accept=".stex"
+                    aria-label="Select STEX file"
+                />
+                <button type="button" id="convertBtn">Convert to PNG</button>
+            </form>
+
+            <div id="progress-container">
+                <div
+                    id="progress-bar"
+                    role="progressbar"
+                    aria-valuenow="0"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
+                    0%
+                </div>
+            </div>
+
+            <div id="status" role="alert" aria-live="polite"></div>
+
+            <div id="results">
+                <!-- Download link will appear here -->
+            </div>
+        </main>
+
+        <script src="script.js"></script>
+    </body>
+</html>
