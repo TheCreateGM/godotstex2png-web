@@ -3,6 +3,9 @@
 A simple, client-side web tool to convert Godot Engine's `.stex` (StreamTexture2D) files into standard `.png` images directly in your browser.
 
 <!-- ![Screenshot](link/to/your/screenshot.png) --> <!-- Optional: Add a screenshot link -->
+![](img/1.png)
+
+![](img/2.png)
 
 ## Features
 
