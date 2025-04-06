@@ -26,7 +26,7 @@ A simple, client-side web tool to convert Godot Engine's `.stex` (StreamTexture2
 
 The easiest way to use the converter is via the live version hosted on GitHub Pages:
 
-**➡️ Live Demo: [https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/](https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/)**
+**➡️ Live Demo: [https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/](https://TheCreateGM.github.io/godotstex2png-web/)**
 
 *(Replace `YOUR_USERNAME` and `YOUR_REPOSITORY_NAME` with your actual GitHub username and the name of this repository)*
 
