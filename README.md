@@ -7,6 +7,8 @@ A simple, client-side web tool to convert Godot Engine's `.stex` (StreamTexture2
 
 ![](img/2.png)
 
+🔗 **[View](https://thecreategm.github.io/godotstex2png-web/stex2png/index.html)**
+
 ## Features
 
 *   **Client-Side Conversion:** Files are processed directly in your browser using JavaScript. No server upload is required, ensuring privacy and speed.
